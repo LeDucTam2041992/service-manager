@@ -1,0 +1,80 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  application:
+    name: service-manager
+  cloud:
+      config:
+        enabled: false
+  main:
+    allow-bean-definition-overriding: true
+#    lazy-initialization: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  datasource:
+    driverClassName: ${JDBC_DATABASE_DRIVER:org.postgresql.Driver}
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://127.0.0.1:5432/postgres?currentSchema=service-manager}
+#    username: ${JDBC_DATABASE_USERNAME:tamld}
+    username: ${JDBC_DATABASE_USERNAME:postgres}
+#    password: ${JDBC_DATABASE_PASSWORD:123456}
+    password: ${JDBC_DATABASE_PASSWORD:EsMvvmQrYI}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        format_sql: true
+        default_schema: ${SCHEMA:service-manager}
+  data:
+    redis:
+      database: 4
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+#      password: ${REDIS_PASSWORD:123456}
+      password: ${REDIS_PASSWORD:pG7L5T7DMp}
+
+kpro:
+  security:
+    jwt:
+      config:
+#        internalPrivateKey: ${INTERNAL_PRIVATE_KEY:MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDilhr5b1wqVNVQ6Lz1fr/t+nO4bgQjDro0vRn5IC7NgSohDHPKee2eCD9SGdvfGi9KPcrPH9DMldl4UEP1pPQbrwS0DnJfa9ugHSdxuX/B2jAJcQYAdE8TBnnlwv1L2zeHAEXfELHtisN4QcAei6qqZT7PHmxbROFrO5yV5cLGz3BBN/WxQ5hNXJ8bQm2l+ehKC9zETqezmL5+sMtUrx9bXouYVf/MLzOb7QU4NE2qSiZhkoCd78JUb6S74FdPyPq1TYFhmZqn6IWcB1tr3tepo4nJcWN5JDxskfkrrIyahQSrcShHnZLq04uJNpNsExEfof8PWbkkjJC1OZofByxFAgMBAAECggEBAKEtGT75QdwywBJvm4odgTUtBIfaakLtxPKi2QjnJaO1D1y22N7cYHQbdb9W+Zn3rE/pKIyxGvuMVEdLASyJC8NtebEC3cSWmoGIe3hf9UrVg3oT1asZEO59mtQfIcKFyzfSr+D+pTJNlMHEM38G5n2Sy1zVTUqW8qoumzHdX/G+YnzomU1F2GEi2f8ewwWoIfOebkyyUbjggoxZsaqZnSXlB3o+yLd3Zb53QLdI4/QDzjHezh71TYfuLcVVqJUV7kAPzmkyM+tN4NBoU6bRqBikNgE7G1mu3WLtUwWPEDtcuf0bgdyMH24nf5PHaVN0m/1CH6swXqJMGNqccjRiPbkCgYEA8UJ3AgLDtFIHPRhlFMSELT58Mxz4tyrWLTpUus2b6PCENOFoDC5j9wSc+zWgC2utVydwOXaroAzn+/0ljauvLFwJrdS6Zar2VeM4nK2pePKZg0xii/nwsf4aQtEMgotHhW3pod8MHSqdeoHckh+yQCD5zZ+8wd2qhH/F/A9KFm8CgYEA8G4i2iWrJJ8i7qh7elquvrQt5L8Q+cwVdVrUS0jRKbOwvTBYBN5+USE67zsZZb9M3/pOj5vXdKIeSoDrzgIUGT2ylg026QAOKL8HVB1pch6/s1y1EIQCuhkugC58Bw8R+bYc/Fp0jZqn1vSIUFZfesIFF5unf94JUO+Pdy1x4osCgYA42oTZAHXGBJ6YEyue3UCYuOTj1qv13i5isiBNdS6MkkFVhNjUJgqAp6GmwVhZ2KIcq7qSkBiZuvDgPSOgYxkAxx+wyzSxyLwMOWOZ6ILLccAjZNjES74g89SUclcUXGYaV3B7KOjd5rD9saSc+sMywZKclkwRE3+fgczSPXgkGQKBgEuuD1BlbQKhCOjgpcV0x+6FXrDTJ6/JerOu/IYaDKS4yBg1IG+f7VjyQc/N5YeueK9D5fi0UFSJN0myXQdChjsPvagXzsH2334Z61+hxnBCl4sI0oG5W/ZiOM3mU+oQ51KX7XXNr0Rnew9hd4r6NSG58spkl4vbQ0lzrtAPwPpTAoGAWvaVhC9FaoFIBMxRVWsBPO/sl4K+fNw3XPSa5xl6quVpIq5fJHlShFsP74Lr37FbIeGzH+4zZTPhe1qd2N8/E4QO6JLxOXigUWQcncXf9QYxtRxpClGFXviYS8VgVV2GQ91Nskc9uHdeTZJKLa+XpTBgUdxOiFKn6tkzyMdOl74=}
+#        internalPublicKey: ${INTERNAL_PUBLIC_KEY:MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4pYa+W9cKlTVUOi89X6/7fpzuG4EIw66NL0Z+SAuzYEqIQxzynntngg/Uhnb3xovSj3Kzx/QzJXZeFBD9aT0G68EtA5yX2vboB0ncbl/wdowCXEGAHRPEwZ55cL9S9s3hwBF3xCx7YrDeEHAHouqqmU+zx5sW0ThazucleXCxs9wQTf1sUOYTVyfG0JtpfnoSgvcxE6ns5i+frDLVK8fW16LmFX/zC8zm+0FODRNqkomYZKAne/CVG+ku+BXT8j6tU2BYZmap+iFnAdba97XqaOJyXFjeSQ8bJH5K6yMmoUEq3EoR52S6tOLiTaTbBMRH6H/D1m5JIyQtTmaHwcsRQIDAQAB}
+        internalKeySign: ${INTERNAL_KEY_SIGN:azc@12KttHbbVKLOKJnxmKJbnBHbH9lkklihxsklw}
+        expiredInSeconds: ${INTERNAL_EXPRIED:300}
+    public-path:
+      paths: ${PUBLIC_PATHS:/api/tests/**, /api/v1/admin/**, /api/permissions/check, /api/v1/client/**}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: TRACE
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: TRACE
+#    org.apache: trace
+
+KC_URL: http://keycloak.kube-dev.io:6060
+KC_REALM: master
+KC_CLIENT_ID: admin-cli
+KC_USERNAME: tamld
+KC_PASSWORD: 123456
